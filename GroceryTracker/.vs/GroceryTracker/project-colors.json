@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "87d93b4d-5123-45d6-9b42-ccfe36741aee": {
+      "ProjectGuid": "87d93b4d-5123-45d6-9b42-ccfe36741aee",
+      "DisplayName": "GroceryTracker",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
