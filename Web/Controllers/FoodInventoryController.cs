@@ -26,21 +26,50 @@ public class FoodInventoryController : ControllerBase, IFoodInventoryController
     [HttpGet]
     public async Task<IActionResult> GetInventory([FromBody] InventoryQuery query)
     {
-        var inventoryList = await _service.GetFoodInventory(query);
-        return Ok(inventoryList);
+        try
+        {
+            var inventoryList = await _service.GetFoodInventory(query);
+            return Ok(inventoryList);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        }
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetFood([FromQuery] int id)
     {
-        var item = await _service.GetFood(id);
-        return Ok(item);
+        try
+        {
+            var item = await _service.GetFood(id);
+            return Ok(item);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        }
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdateFood()//[FromQuery] FoodDto food)
+    public async Task<IActionResult> UpdateFood([FromQuery] FoodDto food)
     {
-        var item = await _service.UpdateFood();
-        return Ok(item);
+        try
+        {
+            var item = await _service.UpdateFood(food);
+            return Ok(item);
+        }
+        catch (ValidationException ex)
+        {
+            // TODO: Test this!
+            return ValidationProblem(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        }
     }
 }

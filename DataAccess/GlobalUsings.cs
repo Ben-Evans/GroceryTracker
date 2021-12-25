@@ -1,1 +1,2 @@
-﻿global using Models.SecurityModels;
+﻿global using Models.DomainModels;
+global using Models.SecurityModels;
