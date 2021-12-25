@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace GroceryTracker.Data.Migrations
+namespace DataAccess.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

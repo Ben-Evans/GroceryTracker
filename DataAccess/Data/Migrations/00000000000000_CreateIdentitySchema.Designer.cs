@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 
-namespace GroceryTracker.Data.Migrations
+namespace DataAccess.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
@@ -21,7 +21,7 @@ namespace GroceryTracker.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0-rc.1.20417.2");
 
-            modelBuilder.Entity("GroceryTracker.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Models.SecurityModels.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -376,7 +376,7 @@ namespace GroceryTracker.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("GroceryTracker.Models.ApplicationUser", null)
+                    b.HasOne("Models.SecurityModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -385,7 +385,7 @@ namespace GroceryTracker.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("GroceryTracker.Models.ApplicationUser", null)
+                    b.HasOne("Models.SecurityModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -400,7 +400,7 @@ namespace GroceryTracker.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GroceryTracker.Models.ApplicationUser", null)
+                    b.HasOne("Models.SecurityModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -409,7 +409,7 @@ namespace GroceryTracker.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("GroceryTracker.Models.ApplicationUser", null)
+                    b.HasOne("Models.SecurityModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

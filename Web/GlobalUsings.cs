@@ -4,7 +4,7 @@ global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Identity.UI;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
-global using GroceryTracker.Extensions;
+global using Web.Extensions;
 global using Models.ApiQueries;
 global using Models.SecurityModels;
 global using Core.Services;

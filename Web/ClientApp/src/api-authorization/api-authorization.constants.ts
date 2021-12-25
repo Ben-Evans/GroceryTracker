@@ -1,4 +1,4 @@
-export const ApplicationName = 'GroceryTracker';
+export const ApplicationName = 'Nexus';
 
 export const ReturnUrlType = 'returnUrl';
 

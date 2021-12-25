@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!-- Uncomment when Mapster updates for .Net 6
   <ItemGroup>
 	<Generated Include="**\*.g.cs" />
   </ItemGroup>
@@ -15,13 +16,14 @@
 
   <Target Name="Mapster" AfterTargets="AfterBuild">
 	<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore" />
-	<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster model -a &quot;$(TargetDir)$(ProjectName).dll&quot; -n Dtos -b Models.Dtos" />
-	<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster extension -a &quot;$(TargetDir)$(ProjectName).dll&quot; -n Dtos.Mappers -b Models.Dtos.Mappers" />
-	<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -n Dtos.Mappers -b Models.Dtos.Mappers" />
+	<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster model -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o Dtos -b Models.Dtos" />
+	<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster extension -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o Dtos.Mappers -b Models.Dtos.Mappers" />
+	<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o Dtos.Mappers -b Models.Dtos.Mappers" />
   </Target>
+  -->
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
+    <Folder Include="Dtos\Mappers\" />
     <Folder Include="Enums\" />
   </ItemGroup>
 
