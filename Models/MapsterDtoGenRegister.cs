@@ -1,4 +1,4 @@
-﻿// Uncomment when Mapster updates to .NET 6
+﻿// TODO: Uncomment when Mapster updates to .NET 6
 /*using Mapster;
 using System.Reflection;
 

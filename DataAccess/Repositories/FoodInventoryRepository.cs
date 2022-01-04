@@ -2,38 +2,50 @@
 
 public interface IFoodInventoryRepository
 {
-    Task<IQueryable<Food>> GetFoodInventory();
-    Task<Food> GetFood(int id);
-    Task<bool> SaveFood(params Food[] foods);
-    Task<bool> DeleteFood(params Food[] foods);
+    IQueryable<Food> GetModels(bool? enableTracking = default, params string[] includedPropertyPaths);
+    Task<Food?> GetModel(int id, bool? enableTracking = default, params string[] includedPropertyPaths);
+    Task<bool> Save(params Food[] foods);
+    void Delete(params Food[] foods);
 }
 
 public class FoodInventoryRepository : IFoodInventoryRepository
 {
-    private IDbAccess _dbAccess;
+    private readonly ApplicationDbContext _dbAccess;
 
-    public FoodInventoryRepository(IDbAccess dbAccess)
+    public FoodInventoryRepository(ApplicationDbContext dbAccess)
     {
         _dbAccess = dbAccess;
     }
 
-    public Task<Food> GetFood(int id)
+    public IQueryable<Food> GetModels(bool? enableTracking = default, params string[] includedPropertyPaths)
     {
-        throw new NotImplementedException();
+        return _dbAccess.Foods
+            .IncludeProperties(includedPropertyPaths)
+            .WithTracking(enableTracking);
     }
 
-    public Task<IQueryable<Food>> GetFoodInventory()
+    public async Task<Food?> GetModel(int id, bool? enableTracking = default, params string[] includedPropertyPaths)
     {
-        throw new NotImplementedException();
+        var food = await GetModels(enableTracking, includedPropertyPaths)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        return food;
     }
 
-    public Task<bool> SaveFood(params Food[] foods)
+    public async Task<bool> Save(Food[] foods)
     {
-        throw new NotImplementedException();
+        foreach (var food in foods)
+        {
+            if (food.IsSaved()) await _dbAccess.AddAsync(food);
+            /*else if (food.Id > 0) _dbAccess.Update(food); // TODO: Unnessesary? Should always be tracked anyways
+            else throw new NotImplementedException("Discovered unexpected data state.");*/
+            else if (food.Id < 0) throw new NotImplementedException("Discovered unexpected data state.");
+        }
+        var saveSuccess = (await _dbAccess.SaveChangesAsync()) > 0;
+        return saveSuccess;
     }
 
-    public Task<bool> DeleteFood(params Food[] foods)
+    public void Delete(params Food[] foods)
     {
-        throw new NotImplementedException();
+        _dbAccess.RemoveRange(foods);
     }
 }

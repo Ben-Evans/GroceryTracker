@@ -2,5 +2,5 @@
 
 public interface IDeletable
 {
-    bool Delete { get; set; }
+    bool ToDelete { get; set; }
 }

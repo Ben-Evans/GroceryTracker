@@ -4,9 +4,10 @@ public interface IBudgetingController
 {
 }
 
-[Authorize]
-[ApiController]
-[Route("api/[controller]")]
-public class BudgetingController : ControllerBase, IBudgetingController
+public class BudgetingController : BaseApiController<IBudgetingController>, IBudgetingController
 {
+    public BudgetingController(ILogger<IBudgetingController> logger)
+        : base(logger)
+    {
+    }
 }

@@ -1,2 +1,10 @@
-﻿global using Models.Enums;
+﻿global using AutoMapper;
+global using Microsoft.EntityFrameworkCore;
+global using Models.DomainModels;
+global using Models.Dtos;
+global using Models.Enums;
+global using Models.Extensions;
 global using Models.Interfaces;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using System.Reflection;
